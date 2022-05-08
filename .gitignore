@@ -1,3 +1,6 @@
 # virtual env
 /venv
 venv/
+
+# idea
+/.idea
