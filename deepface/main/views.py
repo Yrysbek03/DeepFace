@@ -32,7 +32,8 @@ ethnicity = {
 
 
 def index(request):
-    return render(request, template_name='main/index.html', context={'img': None})
+    coffees = ['Espresso', 'Doppio', 'Macchiato', 'Ristretto', 'Americano', 'Café Latte', 'Cappuccino', 'Flat White', 'Piccolo Latte', 'Mocha', 'Affogato', 'Irish Coffee']
+    return render(request, template_name='main/index.html', context={'coffees': coffees})
 
 
 def recognize(request):
@@ -65,7 +66,10 @@ def recognize(request):
 
         index_age = np.where(model_age.predict([main])[0] == 1.)[0][0]
 
-        doc = Document.objects.create(file=image, gender=gender, age=ages[index_age],
+        client_id = request.POST['client_id']
+        coffee_type = request.POST['coffee_type']
+
+        doc = Document.objects.create(coffee_type=coffee_type, client_id=client_id, file=image, gender=gender, age=ages[index_age],
                                       ethnicity=ethnicity[index_ethnicity],
                                       pixels=to_doc)
         doc.save()

@@ -6,7 +6,7 @@ from main.models import Document
 class DocumentForm(forms.ModelForm):
     class Meta:
         model = Document
-        exclude = ['age', 'ethnicity', 'gender', 'pixels']
+        exclude = ['age', 'ethnicity', 'gender', 'pixels', 'created']
 
     def __init__(self, *args, **kwargs):
         super(DocumentForm, self).__init__(*args, **kwargs)
